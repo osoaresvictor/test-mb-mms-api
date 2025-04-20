@@ -34,3 +34,25 @@ htmlcov/
 
 # macOS
 .DS_Store
+
+# Terraform state
+*.tfstate
+*.tfstate.backup
+*.tfstate.*
+
+# Crash logs
+crash.log
+
+# Terraform plan
+*.tfplan
+
+# Local .terraform directory
+.terraform/
+
+# Override files (usados localmente)
+terraform.tfvars
+terraform.tfvars.json
+
+# Temp files
+*.bak
+*.tmp
