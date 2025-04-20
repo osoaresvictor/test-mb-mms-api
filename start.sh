@@ -1,12 +1,13 @@
 #!/bin/bash
+set -e
 
 echo "Current environment: $ENV"
 
-if [ "$ENV" = "prod" ]; then
-  echo "Skipping Alembic migration in production."
-else
+if [ "${RUN_MIGRATIONS:-true}" = "true" ]; then
   echo "Running Alembic migrations..."
   PYTHONPATH=. alembic upgrade head
+else
+  echo "Skipping Alembic migrations."
 fi
 
 echo "Starting API..."
