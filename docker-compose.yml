@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: mb-api
+    command: ["bash", "./start.sh"]
+    volumes:
+        - app_data:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.docker
+    depends_on:
+      - memcached
+
+  memcached:
+    image: memcached:latest
+    container_name: mb-cache
+    ports:
+      - "11211:11211"
+
+  init-loader:
+    build: .
+    container_name: mb-init-loader
+    command: python ./app/workers/initial_loader.py
+    volumes:
+      - app_data:/app
+    environment:
+      - PYTHONPATH=/app
+    env_file:
+      - .env.docker
+    depends_on:
+      - web
+
+volumes:
+  app_data:
