@@ -6,8 +6,8 @@ resource "aws_ecs_service" "mb_api_service" {
   desired_count   = 1
 
   network_configuration {
-    subnets          = var.subnets
+    subnets          = [aws_subnet.main.id]
     assign_public_ip = true
-    security_groups  = var.security_groups
+    security_groups  = [aws_security_group.ecs_service.id]
   }
 }

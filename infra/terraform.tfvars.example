@@ -1,2 +1,0 @@
-subnets = ["subnet-xxxxxxxx"]
-security_groups = ["sg-xxxxxxxx"]
